@@ -61,16 +61,37 @@ parsers = static_library(
 )
 
 
-app_sources = [
-  'source/app/app.cc',
+astmlib_sources = [
+  'source/astml_doc.cc',
+  'source/runner.cc'
 ]
 
-app = library('astML',
-  app_sources,
+
+astmlib = library(
+  'astML',
+  astmlib_sources,
   install: true,
   include_directories: [app_includes],
   dependencies: [app_deps],
   link_with: [parsers]
+)
+
+astmlib_dep = declare_dependency(
+  include_directories: [app_includes],
+  link_with: [astmlib]
+)
+
+
+app_sources = [
+  'source/app/app.cc',
+]
+
+app = library('app',
+  app_sources,
+  install: true,
+  include_directories: [app_includes],
+  dependencies: [app_deps],
+  link_with: [parsers, astmlib]
 )
 
 exe = executable(
