@@ -5,6 +5,7 @@
 
 #include <pugixml.hpp>
 
+#include <Java20ParserVisitor.h>
 #include <TypeScriptParserVisitor.h>
 
 namespace astmlib {
@@ -20,6 +21,8 @@ struct astml_doc final {
 namespace internal {
 
 class TypescriptASTVisitor : public TypeScriptParserVisitor {};
+
+class JavaASTVisitor : public Java20ParserVisitor {};
 
 } // namespace internal
 
