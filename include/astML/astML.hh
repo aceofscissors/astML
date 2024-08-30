@@ -3,14 +3,14 @@
 #include <string>
 #include <string_view>
 
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
 namespace astmlib {
 
-using xml_doc = rapidxml::xml_document<>;
+using xml_doc_t = pugi::xml_document;
 
 struct astml_doc final {
-  xml_doc xml;
+  xml_doc_t xml;
 
   auto write(const std::string &path) -> void;
 };

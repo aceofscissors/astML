@@ -43,13 +43,15 @@ gen_parsers = custom_target(
 cmake = import('cmake')
 antlr4_proj = cmake.subproject('antlr4_CppRuntime')
 
+pugixml_proj = cmake.subproject('pugixml')
 
 app_includes = [
   include_directories('include')
 ]
 
 app_deps = [
-  antlr4_proj.dependency('antlr4_shared')
+  antlr4_proj.dependency('antlr4_shared'),
+  pugixml_proj.dependency('pugixml')
 ]
 
 

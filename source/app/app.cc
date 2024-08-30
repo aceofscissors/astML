@@ -15,9 +15,9 @@ namespace astML {
 
 namespace {
 
-inline auto
-split_string(const std::string_view &str,
-             const std::string_view &delim) -> std::span<std::string> {
+inline auto split_string(const std::string_view &str,
+                         const std::string_view &delim)
+    -> std::span<std::string> {
   std::vector<std::string> result;
   for (const auto &substr : std::views::split(str, delim)) {
     result.push_back(std::string{substr.begin(), substr.end()});

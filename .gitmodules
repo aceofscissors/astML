@@ -1,0 +1,3 @@
+[submodule "subprojects/pugixml"]
+	path = subprojects/pugixml
+	url = https://github.com/neonredtech/pugixml.git

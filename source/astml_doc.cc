@@ -8,11 +8,7 @@
 namespace astmlib {
 
 auto astml_doc::write(const std::string &path) -> void {
-  std::ofstream fp(path);
-  std::string buffer;
-
-  rapidxml::print(std::back_inserter(buffer), this->xml, 0);
-  fp << buffer;
+  this->xml.save_file(path.c_str());
 }
 
 } // namespace astmlib
