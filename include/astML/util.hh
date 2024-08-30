@@ -1,5 +1,6 @@
 #pragma once
 
+#include <format>
 #include <memory>
 #include <optional>
 #include <print>
@@ -67,8 +68,8 @@ inline auto print_stacktrace(const std::stacktrace &&stacktrace) -> void {
 } // namespace util
 
 template <good_exception T>
-[[noreturn]] constexpr inline auto
-panic(const program_error<T> &&error) -> void {
+[[noreturn]] constexpr inline auto panic(const program_error<T> &&error)
+    -> void {
   std::println("panic: called with exception of type {}",
                util::cxx_demangle(typeid(error.exception).name()));
 
@@ -86,6 +87,14 @@ constexpr inline auto error_from_std_exception(good_exception auto &&exception)
 constexpr inline auto panic(good_exception auto &&exception) -> void {
   auto error = error_from_std_exception(exception);
   panic(std::move(error));
+}
+
+constexpr inline auto assert(const std::string_view &name, const bool cond)
+    -> void {
+  if (!(cond)) {
+    panic(
+        std::runtime_error(std::format("Assertion '{}' doesn't hold!", name)));
+  }
 }
 
 } // namespace astML
