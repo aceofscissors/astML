@@ -3,28 +3,27 @@
 
 #include <astML/astML.hh>
 
-#include <array>
 #include <format>
 #include <print>
-#include <ranges>
+#include <span>
 #include <stdexcept>
 #include <string>
 #include <string_view>
+#include <tuple>
 
 namespace astML {
 
 namespace {
 
-auto split_string(const std::string_view &str,
-                  const std::string_view &delim) -> std::array<std::string> {
-  std::vector result;
-
-  const auto split = std::views::split(str, delim);
-  for (const auto &substr : split) {
-    result.push_back({substr});
+inline auto
+split_string(const std::string_view &str,
+             const std::string_view &delim) -> std::span<std::string> {
+  std::vector<std::string> result;
+  for (const auto &substr : std::views::split(str, delim)) {
+    result.push_back(std::string{substr.begin(), substr.end()});
   }
 
-  return result;
+  return std::span{result};
 }
 
 } // namespace
@@ -41,7 +40,7 @@ auto application::run() -> void {
       true; // TODO(Lavinia): turn this into a CLI option
 
   for (const auto &path_arg : this->launch_arguments) {
-    const auto &[filename, _] = split_string(path_arg, ".");
+    const auto filename = split_string(path_arg, ".").front();
 
     auto xml = astml->parse_from(path_arg);
     xml.write(std::format("{}.{}", filename, "xml"));

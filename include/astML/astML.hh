@@ -12,7 +12,7 @@ using xml_doc = rapidxml::xml_document<>;
 struct astml_doc final {
   xml_doc xml;
 
-  auto write(const std::string_view &path) -> void;
+  auto write(const std::string &path) -> void;
 };
 
 class runner final {
