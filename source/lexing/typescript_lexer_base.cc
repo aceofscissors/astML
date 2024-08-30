@@ -1,4 +1,4 @@
-#include <astML/typescript_lexer.hh>
+#include <TypeScriptLexer.h>
 #include <astML/typescript_lexer_base.hh>
 
 using namespace antlr4;

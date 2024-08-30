@@ -1,3 +1,4 @@
+#include <TypeScriptParser.h>
 #include <astML/typescript_parser_base.hh>
 
 using namespace antlr4;
