@@ -25,6 +25,12 @@
 
     packages.default = let
       gcc = pkgs.gcc14;
+      
+      meson-options = "-Dgoogletest_dir=${pkgs.fetchzip {
+        url = "https://github.com/google/googletest/archive/e2239ee6043f73722e7aa812a459f54a28552929.zip";
+        hash = "sha256-SjlJxushfry13RGA7BCjYC9oZqV4z6x8dOiHfl/wpF0=";
+      }}";
+      
     in pkgs.stdenv.mkDerivation {
       name  = "astML";
 
@@ -41,7 +47,7 @@
         antlr
       ]);
 
-      configurePhase = "CC=${gcc}/bin/gcc CXX=${gcc}/bin/g++ meson setup ${./.} build";
+      configurePhase = "CC=${gcc}/bin/gcc CXX=${gcc}/bin/g++ meson setup ${meson-options} ${./.} build";
       
       buildPhase = "ninja -C build";
       
