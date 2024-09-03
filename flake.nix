@@ -33,6 +33,7 @@
       
     in pkgs.stdenv.mkDerivation {
       name  = "astML";
+      pname = "astml";
 
       src = ./.;
 
