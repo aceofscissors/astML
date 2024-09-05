@@ -60,7 +60,14 @@ gen_parsers = custom_target(
 
 
 cmake = import('cmake')
-antlr4_proj = cmake.subproject('antlr4_CppRuntime')
+
+antlr4_opts = cmake.subproject_options()
+
+if get_option('googletest_dir') != ''
+   antlr4_opts.add_cmake_defines({'FETCHCONTENT_SOURCE_DIR_GOOGLETEST': get_option('googletest_dir')})
+endif
+
+antlr4_proj = cmake.subproject('antlr4_CppRuntime', options: antlr4_opts)
 
 pugixml_proj = cmake.subproject('pugixml')
 

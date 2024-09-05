@@ -20,6 +20,19 @@ then, build the project
 ninja -C build
 ```
 
+### Nix
+
+When using any nix commands on this repository, make sure to
+allow the use of submodules:
+
+```
+# Remotely
+nix build github:neonredtech/astML?submodules=1
+
+# Locally
+nix build .?submodules=1
+```
+
 ## Including astML library in your meson project
 
 Clone this repository as a subproject:
