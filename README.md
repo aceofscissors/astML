@@ -27,9 +27,10 @@ allow the use of submodules:
 
 ```
 # Remotely
-nix build github:neonredtech/astML?submodules=1
+nix build "git+https://github.com/neonredtech/astML?submodules=1"
 
 # Locally
+git submodule update --init --recursive
 nix build .?submodules=1
 ```
 
